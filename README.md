@@ -7,15 +7,9 @@
 - User can comment of posts
 
 ## Team Layout
-	| Syntax | Description |
-| ----------- | ----------- |
+| Tables        | Are           |
+| ------------- |-------------:|
 | Alyssa Minzer | Frontend |
 | Chazz Cordell | Frontend |
 | Christopher Savasta | Backend/Frontend |
 | Gary DuMond | Backend |
-
-
-	| Syntax | Description |
-| ----------- | ----------- |
-| Header | Title |
-| Paragraph | Text |
