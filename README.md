@@ -13,3 +13,9 @@
 | Chazz Cordell | Frontend |
 | Christopher Savasta | Backend/Frontend |
 | Gary DuMond | Backend |
+
+
+	| Syntax | Description |
+| ----------- | ----------- |
+| Header | Title |
+| Paragraph | Text |
