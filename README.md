@@ -3,13 +3,18 @@
 
 ## Description
 - User Login/Registration
-- User can create posts
-- User can comment of posts
+- User can create/edit/delete posts
+- User can create/edit/delete comments on posts
+### Extras
+- Socket.io Chat Feature
+- AWS S3 Buckets Image Handeling
+- Edit User
+- Replies on comments
 
 ## Team Layout
-| Tables        | Are           |
-| ------------- |-------------:|
-| Alyssa Minzer | Frontend |
-| Chazz Cordell | Frontend |
+| Developer           | Position         |
+| ------------------- |-----------------:|
+| Alyssa Minzer       | Frontend         |
+| Chazz Cordell       | Frontend         |
 | Christopher Savasta | Backend/Frontend |
-| Gary DuMond | Backend |
+| Gary DuMond         | Backend          |
