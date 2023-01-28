@@ -355,6 +355,5 @@ const UserSchema = new mongoose.Schema({
 ## Post
 ### Coming Soon
 
-
 ## Comments
 ### Coming Soon
