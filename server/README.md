@@ -93,10 +93,40 @@
     "message": "User validation failed: firstName: First name is required, lastName: Last name is required, email: Please enter a valid email, username: Username must be 3 characters or longer"
 }
 ```
+## Login
+> localhost:8000/api/login (POST)
+### Login Successful
+```JSON
+{
+    "msg": "success",
+    "user": {
+        "_id": "63d4874734c770debf1e2462",
+        "firstName": "Phil",
+        "lastName": "Mckracken",
+        "email": "pm@mail.com",
+        "username": "phil",
+        "imgURL": "",
+        "password": "$2b$10$0v1YM8T2lEt51oBtkEkYRe4TkObbxEIUILnsuqzU.Xqcmo6lpDYwe",
+        "createdAt": "2023-01-28T02:24:07.843Z",
+        "updatedAt": "2023-01-28T02:24:07.843Z",
+        "__v": 0
+    }
+}
+```
+### Login Failed
+```JSON
+{
+    "error": "Invalid password/email"
+}
+```
 
-
-
-
+## Logout
+> localhost:8000/api/logot (GET)
+```JSON
+{
+    "msg": "Logged out"
+}
+```
 ## Fetch All Users
 > localhost:8000/api/users (GET)
 ### User logged in, sucessful request
