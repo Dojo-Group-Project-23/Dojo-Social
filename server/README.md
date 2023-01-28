@@ -32,10 +32,6 @@ const UserSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 ```
-
-## Register
-> localhost:8000/register (POST)
-
 ### Register Model Form
 - firstName => Validations: Required
 - lastName => Validations: Required
@@ -45,9 +41,20 @@ const UserSchema = new mongoose.Schema({
 - password => Validations: Required, Min Length 8
 - confirmPassword => Validations: Required, Must Mact Password
 
+### Edit Model Form
+- firstName => Validations: Required
+- lastName => Validations: Required
+- email => Validations: Required, Valid Email
+- username => Validations: Required, Min Length 3
+- imgURL => Validations: None
+- password => user.password **Don't Allow Edit**
+
 ### Login Model Form (Only 1 possible validation message)
 - email
 - password
+
+## Register
+> localhost:8000/register (POST)
 
 ### Successful Registration
 ```JSON
