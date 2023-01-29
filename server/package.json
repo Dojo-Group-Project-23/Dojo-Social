@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "```JavaScript\r const UserSchema = new mongoose.Schema({\r     firstName: {\r         type: String,\r         required: [true, \"First name is required\"]\r     },\r     lastName: {\r         type: String,\r         required: [true, \"Last name is required\"]\r     },\r     email: {\r         type: String,\r         required: [true, \"Email is required\"],\r         validate: {\r             validator: val => /^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]+)?$/.test(val),//REGEX checks for email format\r             message: \"Please enter a valid email\"\r         }\r     },\r     username: {\r         type: String,\r         required: [true, \"Username is required\"],\r         minlength: [3, \"Username must be 3 characters or longer\"]\r     },\r     imgURL: {\r         type: String\r     },\r     password: {\r         type: String,\r         required: [true, \"Password is required\"],\r         minlength: [8, \"Password must be 8 characters or longer\"]\r     }\r },{timestamps:true})\r ```\r ### Register Model Form\r - firstName => Validations: Required\r - lastName => Validations: Required\r - email => Validations: Required, Valid Email\r - username => Validations: Required, Min Length 3\r - imgURL => Validations: None\r - password => Validations: Required, Min Length 8\r - confirmPassword => Validations: Required, Must Mact Password",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.7.5",
+    "socket.io": "^4.5.4"
+  }
+}
