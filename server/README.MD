@@ -1,4 +1,8 @@
 # Users
+```console
+npm install bcrypt cookie-parser cors dotenv express jsonwebtoken mongoose socket.io
+```
+
 ```JavaScript
 const UserSchema = new mongoose.Schema({
     firstName: {
