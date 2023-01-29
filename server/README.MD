@@ -356,8 +356,98 @@ const UserSchema = new mongoose.Schema({
 }
 ```
 
-## Post
-### Coming Soon
+
+
+
+
+
+
+
+# Posts
+```JavaScript
+const PostSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Types.ObjectId, ref: 'User'
+    },
+    content: {
+        type: String,
+        required: [true, "Please ensure to enter some content before posting"],
+        minlength: [2, 'We require atleast 2 charactes per post']
+    }
+}, {timestamps:true})
+```
+
+### Create/Edit Model Form
+- user => user._id
+- content => Validations: Required, min lingth 2
+
+> **Expected Object** => {user:user._id, constent:contentState} *name of state doesn't have to be contentState*
+
+## Create New Post
+> localhost:8000/api/posts (POST)
+
+### Successful Submit
+```JSON
+{
+    "user": "63d4874734c770debf1e2462",
+    "content": "Can you get all of my posts?",
+    "_id": "63d6f13509432c702f41f018",
+    "createdAt": "2023-01-29T22:20:37.907Z",
+    "updatedAt": "2023-01-29T22:20:37.907Z",
+    "__v": 0
+}
+```
+### Failed Validations Example
+```JSON
+ "errors": {
+        "content": {
+            "name": "ValidatorError",
+            "message": "We require atleast 2 charactes per post",
+            "properties": {
+                "message": "We require atleast 2 charactes per post",
+                "type": "minlength",
+                "minlength": 2,
+                "path": "content",
+                "value": "C"
+            },
+            "kind": "minlength",
+            "path": "content",
+            "value": "C"
+        }
+    },
+    "_message": "Post validation failed",
+    "name": "ValidationError",
+    "message": "Post validation failed: content: We require atleast 2 charactes per post"
+```
+
+## Fetch All Posts
+> localhost:8000/api/posts (GET)
+```JSON
+
+```
+## Fetch Post By Post ID
+> localhost:8000/api/posts/:postId (GET)
+```JSON
+
+```
+## Fetch Posts By User Id
+> localhost:8000/api/posts/user/:userId (GET)
+```JSON
+
+```
+## Update Post
+> localhost:8000/api/posts/:postId (PUT)
+```JSON
+
+```
+## Delete Post
+> localhost:8000/api/posts/:postId (DELETE)
+```JSON
+
+```
+
+
+
 
 ## Comments
 ### Coming Soon
