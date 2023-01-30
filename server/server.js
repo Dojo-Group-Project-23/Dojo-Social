@@ -19,6 +19,7 @@ require("./config/mongoose.config")
 require("./routes/user.routes")(app)
 require("./routes/post.routes")(app)
 require("./routes/comment.routes")(app)
+require("./routes/message.routes")(app)
 
 const server = app.listen(8000,() => console.log('Dojo-Social Running: http://localhost:8000'))
 
