@@ -378,7 +378,7 @@ const PostSchema = new mongoose.Schema({
 ```
 
 ### Create/Edit Model Form
-- user => user._id
+- user => user._id *Store in useContext when signed in*
 - content => Validations: Required, min lingth 2
 
 > **Expected Object** => {user:user._id, constent:contentState} *name of state doesn't have to be contentState*
@@ -632,8 +632,8 @@ const CommentSchema = new mongoose.Schema({
 ```
 
 ### Create/Edit Model Form
-- user => user._id
-- post => post._id
+- user => user._id *Store in useContext when signed in*
+- post => post._id *Fetch from post element*
 - content => Validations: Required, min lingth 2
 
 > **Expected Object** => {user:user._id, post:post._id, constent:contentState} *name of state doesn't have to be contentState*
@@ -906,4 +906,122 @@ const CommentSchema = new mongoose.Schema({
     "updatedAt": "2023-01-30T03:50:05.080Z",
     "__v": 0
 }
+```
+
+
+
+
+
+
+
+
+
+# Meaagages
+```JavaScript
+const MessageSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    },
+    room: {
+        type: String
+    },
+    content: {
+        type: String,
+        required: [true, 'Sorry, we dont allow empty messages']
+    }
+}, {timestamps: true})
+```
+
+### Create/Edit Model Form
+- user => user._id *Store in useContext when signed in*
+- room => room *Get from link, useParams()*
+- content => Validations: Required
+
+> **Expected Object** => {user:user._id, room:roomUseParams, content:contentState} *Use useParams to get room*
+
+## Create New Message
+> localhost:8000/api/messages/new (POST)
+
+### Successful Submit
+```JSON
+{
+    "user": "63d5c456331b455104ca817c",
+    "room": "room_2",
+    "content": "sup",
+    "_id": "63d83082c4059134390e9703",
+    "createdAt": "2023-01-30T21:02:58.216Z",
+    "updatedAt": "2023-01-30T21:02:58.216Z",
+    "__v": 0
+}
+```
+### Failed Validations Example
+```JSON
+{
+    "errors": {
+        "content": {
+            "name": "ValidatorError",
+            "message": "Sorry, we dont allow empty messages",
+            "properties": {
+                "message": "Sorry, we dont allow empty messages",
+                "type": "required",
+                "path": "content",
+                "value": ""
+            },
+            "kind": "required",
+            "path": "content",
+            "value": ""
+        }
+    },
+    "_message": "Message validation failed",
+    "name": "ValidationError",
+    "message": "Message validation failed: content: Sorry, we dont allow empty messages"
+}
+```
+
+## Fetch Messages By Room (*Returns Empty Array If Room Doesn't Exist Or Is Empty*)
+> localhost:8000/api/chat/:room (GET)
+```JSON
+[
+    {
+        "_id": "63d8306bc4059134390e9701",
+        "user": {
+            "_id": "63d4874734c770debf1e2462",
+            "firstName": "Phil",
+            "lastName": "McKracken",
+            "email": "phil@mail.com",
+            "username": "TheKracken",
+            "imgURL": "https://trade-journal-363.s3.amazonaws.com/866-8-21",
+            "password": "$2b$10$0v1YM8T2lEt51oBtkEkYRe4TkObbxEIUILnsuqzU.Xqcmo6lpDYwe",
+            "createdAt": "2023-01-28T02:24:07.843Z",
+            "updatedAt": "2023-01-29T00:58:58.141Z",
+            "__v": 0
+        },
+        "room": "room_2",
+        "content": "Hi",
+        "createdAt": "2023-01-30T21:02:35.446Z",
+        "updatedAt": "2023-01-30T21:02:35.446Z",
+        "__v": 0
+    },
+    {
+        "_id": "63d83082c4059134390e9703",
+        "user": {
+            "_id": "63d5c456331b455104ca817c",
+            "firstName": "John",
+            "lastName": "Wick",
+            "email": "jwick@mail.com",
+            "username": "babbayagga",
+            "imgURL": "https://trade-journal-363.s3.amazonaws.com/866-8-21",
+            "password": "$2b$10$jyMfQoisz30vWUgOzeciqOqiHMg3xInc6uysNlG7kyr3D1IrpMwje",
+            "createdAt": "2023-01-29T00:56:54.336Z",
+            "updatedAt": "2023-01-29T00:56:54.336Z",
+            "__v": 0
+        },
+        "room": "room_2",
+        "content": "sup",
+        "createdAt": "2023-01-30T21:02:58.216Z",
+        "updatedAt": "2023-01-30T21:02:58.216Z",
+        "__v": 0
+    }
+]
 ```

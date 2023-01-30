@@ -17,4 +17,4 @@
 | Alyssa Minzer       | Frontend         |
 | Chazz Cordell       | Frontend         |
 | Christopher Savasta | Backend/Frontend |
-| Gary DuMond         | Backend          |
+| Gary DuMond         | Backend/Lead     |
