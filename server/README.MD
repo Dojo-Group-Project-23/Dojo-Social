@@ -356,8 +356,253 @@ const UserSchema = new mongoose.Schema({
 }
 ```
 
-## Post
-### Coming Soon
+
+
+
+
+
+
+
+# Posts
+```JavaScript
+const PostSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Types.ObjectId, ref: 'User'
+    },
+    content: {
+        type: String,
+        required: [true, "Please ensure to enter some content before posting"],
+        minlength: [2, 'We require atleast 2 charactes per post']
+    }
+}, {timestamps:true})
+```
+
+### Create/Edit Model Form
+- user => user._id
+- content => Validations: Required, min lingth 2
+
+> **Expected Object** => {user:user._id, constent:contentState} *name of state doesn't have to be contentState*
+
+## Create New Post
+> localhost:8000/api/posts (POST)
+
+### Successful Submit
+```JSON
+{
+    "user": "63d4874734c770debf1e2462",
+    "content": "Can you get all of my posts?",
+    "_id": "63d6f13509432c702f41f018",
+    "createdAt": "2023-01-29T22:20:37.907Z",
+    "updatedAt": "2023-01-29T22:20:37.907Z",
+    "__v": 0
+}
+```
+### Failed Validations Example
+```JSON
+ "errors": {
+        "content": {
+            "name": "ValidatorError",
+            "message": "We require atleast 2 charactes per post",
+            "properties": {
+                "message": "We require atleast 2 charactes per post",
+                "type": "minlength",
+                "minlength": 2,
+                "path": "content",
+                "value": "C"
+            },
+            "kind": "minlength",
+            "path": "content",
+            "value": "C"
+        }
+    },
+    "_message": "Post validation failed",
+    "name": "ValidationError",
+    "message": "Post validation failed: content: We require atleast 2 charactes per post"
+```
+
+## Fetch All Posts
+> localhost:8000/api/posts (GET)
+```JSON
+[
+    {
+        "_id": "63d6f13509432c702f41f018",
+        "user": {
+            "_id": "63d4874734c770debf1e2462",
+            "firstName": "Phil",
+            "lastName": "McKracken",
+            "email": "phil@mail.com",
+            "username": "TheKracken",
+            "imgURL": "https://trade-journal-363.s3.amazonaws.com/866-8-21",
+            "password": "$2b$10$0v1YM8T2lEt51oBtkEkYRe4TkObbxEIUILnsuqzU.Xqcmo6lpDYwe",
+            "createdAt": "2023-01-28T02:24:07.843Z",
+            "updatedAt": "2023-01-29T00:58:58.141Z",
+            "__v": 0
+        },
+        "content": "Can you get all of my posts?",
+        "createdAt": "2023-01-29T22:20:37.907Z",
+        "updatedAt": "2023-01-29T22:20:37.907Z",
+        "__v": 0
+    },
+    {
+        "_id": "63d6effdd515b74625420b06",
+        "user": {
+            "_id": "63d4874734c770debf1e2462",
+            "firstName": "Phil",
+            "lastName": "McKracken",
+            "email": "phil@mail.com",
+            "username": "TheKracken",
+            "imgURL": "https://trade-journal-363.s3.amazonaws.com/866-8-21",
+            "password": "$2b$10$0v1YM8T2lEt51oBtkEkYRe4TkObbxEIUILnsuqzU.Xqcmo6lpDYwe",
+            "createdAt": "2023-01-28T02:24:07.843Z",
+            "updatedAt": "2023-01-29T00:58:58.141Z",
+            "__v": 0
+        },
+        "content": "Hello World",
+        "createdAt": "2023-01-29T22:15:25.131Z",
+        "updatedAt": "2023-01-29T22:15:25.131Z",
+        "__v": 0
+    },
+    {
+        "_id": "63d6ef1c22d1465af201bf41",
+        "user": {
+            "_id": "63d47c3a34c770debf1e2452",
+            "firstName": "Ben",
+            "lastName": "Dover",
+            "email": "bdover@mail.com",
+            "username": "bdover",
+            "imgURL": "https://trade-journal-363.s3.amazonaws.com/866-8-21",
+            "password": "$2b$10$ucbPaHOtKqWSwclgOs7Fp./hCqadFS7uUYbxi96KijYyE0F4bq.4y",
+            "createdAt": "2023-01-28T01:36:58.320Z",
+            "updatedAt": "2023-01-28T01:49:53.979Z",
+            "__v": 0
+        },
+        "content": "My name is Dr. Dover",
+        "createdAt": "2023-01-29T22:11:40.375Z",
+        "updatedAt": "2023-01-29T22:30:06.984Z",
+        "__v": 0
+    }
+]
+```
+## Fetch Post By Post ID
+> localhost:8000/api/posts/:postId (GET)
+```JSON
+[
+    {
+        "_id": "63d6ef1c22d1465af201bf41",
+        "user": {
+            "_id": "63d47c3a34c770debf1e2452",
+            "firstName": "Ben",
+            "lastName": "Dover",
+            "email": "bdover@mail.com",
+            "username": "bdover",
+            "imgURL": "https://trade-journal-363.s3.amazonaws.com/866-8-21",
+            "password": "$2b$10$ucbPaHOtKqWSwclgOs7Fp./hCqadFS7uUYbxi96KijYyE0F4bq.4y",
+            "createdAt": "2023-01-28T01:36:58.320Z",
+            "updatedAt": "2023-01-28T01:49:53.979Z",
+            "__v": 0
+        },
+        "content": "My name is Dr. Dover",
+        "createdAt": "2023-01-29T22:11:40.375Z",
+        "updatedAt": "2023-01-29T22:30:06.984Z",
+        "__v": 0
+    }
+]
+```
+## Fetch Posts By User Id
+> localhost:8000/api/posts/user/:userId (GET)
+```JSON
+[
+    {
+        "_id": "63d6f13509432c702f41f018",
+        "user": {
+            "_id": "63d4874734c770debf1e2462",
+            "firstName": "Phil",
+            "lastName": "McKracken",
+            "email": "phil@mail.com",
+            "username": "TheKracken",
+            "imgURL": "https://trade-journal-363.s3.amazonaws.com/866-8-21",
+            "password": "$2b$10$0v1YM8T2lEt51oBtkEkYRe4TkObbxEIUILnsuqzU.Xqcmo6lpDYwe",
+            "createdAt": "2023-01-28T02:24:07.843Z",
+            "updatedAt": "2023-01-29T00:58:58.141Z",
+            "__v": 0
+        },
+        "content": "Can you get all of my posts?",
+        "createdAt": "2023-01-29T22:20:37.907Z",
+        "updatedAt": "2023-01-29T22:20:37.907Z",
+        "__v": 0
+    },
+    {
+        "_id": "63d6effdd515b74625420b06",
+        "user": {
+            "_id": "63d4874734c770debf1e2462",
+            "firstName": "Phil",
+            "lastName": "McKracken",
+            "email": "phil@mail.com",
+            "username": "TheKracken",
+            "imgURL": "https://trade-journal-363.s3.amazonaws.com/866-8-21",
+            "password": "$2b$10$0v1YM8T2lEt51oBtkEkYRe4TkObbxEIUILnsuqzU.Xqcmo6lpDYwe",
+            "createdAt": "2023-01-28T02:24:07.843Z",
+            "updatedAt": "2023-01-29T00:58:58.141Z",
+            "__v": 0
+        },
+        "content": "Hello World",
+        "createdAt": "2023-01-29T22:15:25.131Z",
+        "updatedAt": "2023-01-29T22:15:25.131Z",
+        "__v": 0
+    }
+]
+```
+## Update Post
+> localhost:8000/api/posts/:postId (PUT)
+### Successful Submit
+```JSON
+{
+    "acknowledged": true,
+    "modifiedCount": 1,
+    "upsertedId": null,
+    "upsertedCount": 0,
+    "matchedCount": 1
+}
+```
+### Falied Validation Example
+```JSON
+{
+    "errors": {
+        "content": {
+            "name": "ValidatorError",
+            "message": "Please ensure to enter some content before posting",
+            "properties": {
+                "message": "Please ensure to enter some content before posting",
+                "type": "required",
+                "path": "content",
+                "value": ""
+            },
+            "kind": "required",
+            "path": "content",
+            "value": ""
+        }
+    },
+    "_message": "Validation failed",
+    "name": "ValidationError",
+    "message": "Validation failed: content: Please ensure to enter some content before posting"
+}
+```
+
+## Delete Post
+> localhost:8000/api/posts/:postId (DELETE)
+```JSON
+{
+    "_id": "63d6ef60d515b74625420afd",
+    "user": "63d47c3a34c770debf1e2452",
+    "content": "Test Post",
+    "createdAt": "2023-01-29T22:12:48.336Z",
+    "updatedAt": "2023-01-29T22:12:48.336Z",
+    "__v": 0
+}
+```
+
+
+
 
 ## Comments
 ### Coming Soon
