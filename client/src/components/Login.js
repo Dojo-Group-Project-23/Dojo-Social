@@ -13,7 +13,7 @@ const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]
 
 const Login = () => {
     const navigate = useNavigate()
-    const { sessionID, setSessionID } = useContext(SessionContext)
+    const { sessionID, setSessionID, setSessionUserName } = useContext(SessionContext)
 
     const firstRunOver = useRef(false)
 
@@ -78,16 +78,19 @@ const Login = () => {
         e.preventDefault()
         try{
             const user = {email:email, password:password}
-            axios.post('http://localhost:8000/api/login', user)
+            axios.post('http://localhost:8000/api/login', user,{withCredentials:true})
             .then(response => {
                 if(response.data.msg === 'success') {
-                    console.log('success')
-                    console.log(response.data.user)
-                    try{
-                        setSessionID(response.data.user._id)
-                    }catch{
-                        console.log(response.data.user._id)
-                    }
+                    // console.log('success')
+                    // console.log(response.data.user)   Commented By GND
+                    // console.log('response, ', response);
+                    setSessionID(response.data.user._id) // Added by GND
+                    setSessionUserName(`${response.data.user.firstName} ${response.data.user.lastName}`) // Added by GND
+                    // try{
+                    //     setSessionID(response.data.user._id)
+                    // }catch{                                        Commented By GND
+                    //     console.log(response.data.user._id)
+                    // }
                     navigate('/dashboard')
                 }
                 else{

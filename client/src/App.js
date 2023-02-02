@@ -13,13 +13,15 @@ import NavigationBar from './components/NavigationBar';
 import Footer from './components/Footer'
 
 import { SessionContext } from './components/Context/SessionContext'
+import PostEditForm from './components/posts/PostEditForm';
 
 function App() {
   const [sessionID, setSessionID] = useState()
+  const [sessionUserName, setSessionUserName] = useState()
 
   return (
       <div className="App">
-      <SessionContext.Provider value={{sessionID, setSessionID}}>
+      <SessionContext.Provider value={{sessionID, setSessionID,sessionUserName, setSessionUserName}}>
         <BrowserRouter>
           <NavigationBar></NavigationBar>
           <Routes>
@@ -30,6 +32,7 @@ function App() {
             <Route path='/upate/:id' element={<UpdateUser/>} />
             <Route path='/delete/:id' element={<DeleteUser/>} />
             <Route path='/debugUsers' element={<UsersDebug/>} />
+            <Route path='/posts/:id/edit' element={<PostEditForm/>} />
           </Routes>
           <Footer></Footer>
         </BrowserRouter>
