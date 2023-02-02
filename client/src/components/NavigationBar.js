@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Container, Navbar, NavDropdown } from 'react-bootstrap'
 import { SessionContext } from './Context/SessionContext'
 import axios from 'axios'
+import DropdownMenu from 'react-bootstrap/esm/DropdownMenu'
 
 const NavigationBar = () => {
     const navigate = useNavigate()
@@ -12,6 +13,10 @@ const NavigationBar = () => {
     const firstRunOver = useRef(false)
 
     useEffect(() => {
+        setSessionID(window.sessionStorage.getItem('loggedInUser'))
+        if(!sessionID) {
+            document.getElementById('navbarScrollingDropdown').title='Login'
+        }
         if(firstRunOver.current === true) {
             const getLoggedUser = async () => {
                 console.log("ok")
@@ -20,6 +25,7 @@ const NavigationBar = () => {
                 try{
                 await axios.get(`http://localhost:8000/api/users/${sessionID}`)
                 .then(response => {
+                    document.getElementById('navbarScrollingDropdown').title='Logged in as: ' + loggedUser?.username
                     console.log(response.data)
                     setLoggedUser(response.data)
                 })
@@ -40,12 +46,12 @@ const NavigationBar = () => {
             console.log('unmounted2')
             firstRunOver.current = true
         }
-    }, [])
+    }, [sessionID])
 
     return (
         <Navbar>
-            <Container>
-                <Navbar.Brand href="#">
+            <Container key={loggedUser._id} >
+                <Navbar.Brand href="/dashboard">
                     <img
                     alt=""
                     src="https://trade-journal-363.s3.amazonaws.com/Dojo_Social_Icon.png" // img by GND
@@ -62,8 +68,8 @@ const NavigationBar = () => {
 
                 {loggedUser?._id != undefined ? 
                 [
-                <NavDropdown key='4' title={'Logged in as: ' + loggedUser?.username } id="navbarScrollingDropdown">
-                    <NavDropdown.Item key='1' href={'/update/' + loggedUser?._id}>
+                <NavDropdown key='0' title={'Logged in as: ' + loggedUser?.username } id="navbarScrollingDropdown">
+                    <NavDropdown.Item key='1' href="/update/' + loggedUser?._id">
                         Edit
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
@@ -75,10 +81,10 @@ const NavigationBar = () => {
                 :
                 [
                 <NavDropdown key='8' title='Login' id="navbarScrollingDropdown">
-                    <NavDropdown.Item key='10' href="/login">
+                    <NavDropdown.Item key='10' onClick={() => navigate('/login')}>
                         Login
                     </NavDropdown.Item>
-                    <NavDropdown.Item key='11' href="/register">
+                    <NavDropdown.Item key='11' onClick={() => navigate('/register')}>
                         Register
                     </NavDropdown.Item>
                 </NavDropdown>

@@ -3,7 +3,7 @@ import './css/Login.css'
 import '../App.css'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faTimes, faInfoCircle, faWindowRestore } from "@fortawesome/free-solid-svg-icons"
 import { Button, Form } from 'react-bootstrap'
 import axios from 'axios'
 import { SessionContext } from './Context/SessionContext'
@@ -32,19 +32,20 @@ const Login = () => {
     //     emailRef.current.focus(); 
     // }, [])
 
-    useEffect(() => {
+    useEffect(() => {        
         if(firstRunOver.current === true) {
-        console.log('sessionID')
-        console.log(sessionID)
-        console.log('is it undefined')
-        console.log(sessionID != undefined ? "nope" : "yup")
-        if(sessionID != undefined) {navigate('/dashboard')}
-        }        
+            setSessionID(window.sessionStorage.getItem('loggedInUser'))
+            console.log('sessionID')
+            console.log(sessionID)
+            console.log('is it undefined')
+            console.log(sessionID != undefined ? "nope" : "yup")
+            
+        }
         return () => { 
             console.log('unmounted1')
             firstRunOver.current = true
         }
-    }, [])
+    }, [sessionID])
 
     useEffect (() => {
         if(firstRunOver) {
@@ -85,6 +86,7 @@ const Login = () => {
                     // console.log(response.data.user)   Commented By GND
                     // console.log('response, ', response);
                     setSessionID(response.data.user._id) // Added by GND
+                    window.sessionStorage.setItem('loggedInUser', response.data.user._id)
                     setSessionUserName(`${response.data.user.firstName} ${response.data.user.lastName}`) // Added by GND
                     // try{
                     //     setSessionID(response.data.user._id)
@@ -112,8 +114,8 @@ const Login = () => {
 
     return (
         <section className="formContainer">
-        <p>{ backendMsg ? backendMsg : "" }</p>
-        <h1>Login<span><p>{ backendMsg ? "  " + backendMsg : "" }</p></span></h1>
+        <h1>Login</h1>
+        <p style={{color:"red"}}>{ backendMsg ? backendMsg : "" }</p>
         <Form onSubmit={handleSubmit}>
             <Form.Label htmlFor='emailForm'>Email:
             <span className={emailValid ? "valid" : "hide"}>

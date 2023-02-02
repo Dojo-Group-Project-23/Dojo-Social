@@ -127,6 +127,7 @@ const Register = () => {
                         console.log('success')
                         console.log(response.data.user)
                         setSessionID(response.data.user._id)
+                        window.sessionStorage.setItem('loggedInUser', response.data.user._id)
                         navigate('/dashboard')
                     }
                     else{
