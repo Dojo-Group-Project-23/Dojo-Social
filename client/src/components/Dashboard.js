@@ -18,9 +18,10 @@ const Dashboard = () => {
     useEffect(() => {
         if(firstRunOver.current === true) {
             const getLoggedUser = async () => {
+                setSessionID(window.sessionStorage.getItem('loggedInUser'))
                 console.log("dashboard")
                 console.log(sessionID)
-                if(!sessionID) {navigate('/login')} // Un-commented By GND
+                if(!sessionID) //{navigate('/login')} // Un-commented By GND
                 try{
                 await axios.get(`http://localhost:8000/api/users/${sessionID}`,{withCredentials:true})
                 .then(response => {

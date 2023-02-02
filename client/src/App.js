@@ -11,6 +11,7 @@ import DeleteUser from './components/DeleteUser'
 import UpdateUser from './components/UpdateUser';
 import NavigationBar from './components/NavigationBar';
 import Footer from './components/Footer'
+import Logout from './components/Logout'
 
 import { SessionContext } from './components/Context/SessionContext'
 import PostEditForm from './components/posts/PostEditForm';
@@ -25,13 +26,14 @@ function App() {
         <BrowserRouter>
           <NavigationBar></NavigationBar>
           <Routes>
-            <Route path='/landing' default element={<LandingPage/>} />
+            <Route path='/' default element={<LandingPage/>} />
             <Route path='/login' element={<Login/>} />
             <Route path='/register' element={<Register/>} />
             <Route path='/dashboard' element={<Dashboard/>} />
-            <Route path='/upate/:id' element={<UpdateUser/>} />
+            <Route path='/update/:id' element={<UpdateUser/>} />
             <Route path='/delete/:id' element={<DeleteUser/>} />
             <Route path='/debugUsers' element={<UsersDebug/>} />
+            <Route path='/logout' element={<Logout/>} />
             <Route path='/posts/:id/edit' element={<PostEditForm/>} />
           </Routes>
           <Footer></Footer>
