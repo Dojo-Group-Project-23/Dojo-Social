@@ -14,7 +14,7 @@ const IMAGE_REGEX = /[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$/
 
 const Register = () => {
     const navigate = useNavigate()
-    const { sessionID, setSessionID } = useContext(SessionContext) 
+    const { sessionID, setSessionID, setSessionUserName } = useContext(SessionContext) 
 
     const firstNameRef = useRef()
     const lastNameRef = useRef()
@@ -47,7 +47,7 @@ const Register = () => {
     }, [])
 
     useEffect(() => {
-        //if(sessionID) {navigate('/dashboard')}
+        // if(sessionID) {navigate('/')}
     }, [])
 
     useEffect(() => {
@@ -118,8 +118,8 @@ const Register = () => {
                 password: password,
                 confirmPassword: confirm
             }
-            console.log('newUser')
-            console.log(user)
+            // console.log('newUser')
+            // console.log(user)
             if(EMAIL_REGEX.test(email) && PASSWORD_REGEX.test(password)){ //someone who knows javascript could enable the button so i'm not assuming there all valid and checking again
                 axios.post('http://localhost:8000/api/register', user)
                 .then(response => {
@@ -127,23 +127,24 @@ const Register = () => {
                         console.log('success')
                         console.log(response.data.user)
                         setSessionID(response.data.user._id)
+                        setSessionUserName(`${response.data.user.firstName} ${response.data.user.lastName}`)
                         window.sessionStorage.setItem('loggedInUser', response.data.user._id)
-                        navigate('/dashboard')
+                        navigate('/')
                     }
                     else{
-                        console.log('backend custom error')
-                        console.log('response.data.msg')
+                        // console.log('backend custom error')
+                        // console.log('response.data.msg')
                         setBackendMsg(response.data.msg)
                     }
                 })
                 .catch(error => {
-                    console.log('axios catch error')
+                    // console.log('axios catch error')
                     setBackendMsg(error.message)
                 })
             }
         }
         catch (err) { 
-            printConsole('try catch error')
+            // printConsole('try catch error')
             setBackendMsg(err.message)
         }
     }

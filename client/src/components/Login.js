@@ -93,7 +93,7 @@ const Login = () => {
                     // }catch{                                        Commented By GND
                     //     console.log(response.data.user._id)
                     // }
-                    navigate('/dashboard')
+                    navigate('/')
                 }
                 else{
                     console.log('backend custom error')

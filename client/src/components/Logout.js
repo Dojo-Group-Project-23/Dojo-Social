@@ -14,7 +14,7 @@ export default function Logout() {
     await axios.get('http://localhost:8000/api/logout/')
     .then(res => console.log(res.data.msg))
     .catch(err => console.log(err.msg))
-    navigate('/')
+    navigate('/login')
     }
 
     useEffect(() => {

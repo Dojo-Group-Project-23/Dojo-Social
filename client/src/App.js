@@ -26,10 +26,10 @@ function App() {
         <BrowserRouter>
           <NavigationBar></NavigationBar>
           <Routes>
-            <Route path='/' default element={<LandingPage/>} />
+            <Route path='/' element={<Dashboard/>} />
+            <Route path='/landingpage' default element={<LandingPage/>} />
             <Route path='/login' element={<Login/>} />
             <Route path='/register' element={<Register/>} />
-            <Route path='/dashboard' element={<Dashboard/>} />
             <Route path='/update/:id' element={<UpdateUser/>} />
             <Route path='/delete/:id' element={<DeleteUser/>} />
             <Route path='/debugUsers' element={<UsersDebug/>} />
