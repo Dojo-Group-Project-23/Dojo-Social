@@ -1,6 +1,13 @@
 dependencies - 
 npm i axios react-router-dom react-bootstrap bootstrap @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
 
+### color palette
+- #8ecae6
+- #219ebc
+- #023047
+- #ffb703
+- #fb8500
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

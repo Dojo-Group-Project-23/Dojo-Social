@@ -45,21 +45,17 @@ const NavigationBar = () => {
     return (
         <Navbar>
             <Container>
-                <Navbar.Brand href="/landing">
+                <Navbar.Brand href="#">
                     <img
                     alt=""
-                    src="/logo.svg"
+                    src="https://trade-journal-363.s3.amazonaws.com/Dojo_Social_Icon.png" // img by GND
                     width="30"
                     height="30"
                     className="d-inline-block align-top"
                     />{' '}
-                    Title
+                    Learn Dojo
                 </Navbar.Brand>
-                
-                <Navbar.Brand href="/dashboard">Home</Navbar.Brand>
-                <Navbar.Brand href="#">Link1</Navbar.Brand>
-                <Navbar.Brand href="#">Link2</Navbar.Brand>
-                <Navbar.Brand href="#">Link3</Navbar.Brand>
+
 
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">

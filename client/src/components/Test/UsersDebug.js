@@ -38,7 +38,7 @@ const UsersDebug = () => {
 
             const getUsers = async () => {
                 try{
-                    await axios.get(`http://localhost:8000/api/users`)
+                    await axios.get(`http://localhost:8000/api/users`,{withCredentials:true})
                     .then(response => {
                         console.log(response.data)
                         setUsers(response.data)
